@@ -7,10 +7,14 @@ import java.io.StringWriter;
 import java.util.stream.Stream;
 
 /**
- *
+ * Utility for printing Kafka Streams Topologies in Graphviz format.
  */
 public class KafkaStreamsTopologyGraphvizPrinter {
 
+  /**
+   * Creates a Graphviz inside a PlantUML format from Kafka Streams {@link Topology}
+   * @return Graphviz included on PlantUML format
+   */
   public static String printPlantUml(Topology topology) {
     StringWriter writer = new StringWriter();
     writer.append("@startuml\n");
@@ -20,6 +24,10 @@ public class KafkaStreamsTopologyGraphvizPrinter {
     return writer.toString();
   }
 
+  /**
+   * Creates a Graphviz from Kafka Streams {@link Topology}
+   * @return Graphviz text
+   */
   public static String print(Topology topology) {
     final TopologyDescription topologyDescription = topology.describe();
     StringWriter writer = new StringWriter();

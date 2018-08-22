@@ -9,7 +9,9 @@
     <version>0.1.0-SNAPSHOT</version>
   </parent>
 
+  <name>Kafka Util: Streams Graphviz printer</name>
   <artifactId>kafka-util-streams-graphviz</artifactId>
+  <description>Utility to print Kafka Streams topology as graphviz diagram.</description>
 
   <dependencies>
     <dependency>
