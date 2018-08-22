@@ -104,6 +104,7 @@
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <updateBranchVersions>true</updateBranchVersions>
           <pushChanges>true</pushChanges>
+          <releaseProfiles>release</releaseProfiles>
         </configuration>
       </plugin>
       <plugin>
