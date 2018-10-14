@@ -25,14 +25,4 @@ public class StreamsTopologyGraphvizTest {
     out.println(graphviz);
     assertTrue(graphviz.contains("digraph G {"));
   }
-
-  @Test
-  public void shouldPrintAsPlantUmlWhenSimpleTopologyIsValid () {
-    Topology topology = simpleStreamSupplier.get().build();
-
-    String graphviz = StreamsTopologyGraphviz.printPlantUml(topology);
-    out.println(graphviz);
-    assertTrue(graphviz.startsWith("@startuml"));
-    assertTrue(graphviz.endsWith("@enduml"));
-  }
 }
