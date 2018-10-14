@@ -1,7 +1,6 @@
 package no.sysco.middleware.kafka.util;
 
 import io.github.livingdocumentation.dotdiagram.DotGraph;
-import java.io.StringWriter;
 import java.util.stream.Stream;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyDescription;
@@ -10,20 +9,6 @@ import org.apache.kafka.streams.TopologyDescription;
  * Utility for printing Kafka Streams Topologies in Graphviz format.
  */
 public class StreamsTopologyGraphviz {
-
-  /**
-   * Creates a Graphviz inside a PlantUML format from Kafka Streams {@link Topology}
-   *
-   * @return Graphviz included on PlantUML format
-   */
-  public static String printPlantUml(Topology topology) {
-    StringWriter writer = new StringWriter();
-    writer.append("@startuml\n");
-    writer.append(print(topology));
-    writer.append("\n@enduml");
-
-    return writer.toString();
-  }
 
   /**
    * Creates a Graphviz from Kafka Streams {@link Topology}
