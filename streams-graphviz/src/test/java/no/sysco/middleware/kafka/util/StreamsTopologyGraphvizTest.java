@@ -1,15 +1,14 @@
 package no.sysco.middleware.kafka.util;
 
+import java.util.function.Supplier;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.Topology;
 import org.junit.Test;
 
-import java.util.function.Supplier;
-
 import static java.lang.System.out;
 import static org.junit.Assert.assertTrue;
 
-public class KafkaStreamsTopologyGraphvizPrinterTest {
+public class StreamsTopologyGraphvizTest {
 
   private final Supplier<StreamsBuilder> simpleStreamSupplier =
       () -> {
@@ -22,17 +21,16 @@ public class KafkaStreamsTopologyGraphvizPrinterTest {
   public void shouldPrintWhenSimpleTopologyIsValid () {
     Topology topology = simpleStreamSupplier.get().build();
 
-    String graphviz = KafkaStreamsTopologyGraphvizPrinter.print(topology);
+    String graphviz = StreamsTopologyGraphviz.print(topology);
     out.println(graphviz);
-    assertTrue(graphviz.startsWith("digraph kafka_streams_topology {"));
-    assertTrue(graphviz.endsWith("}"));
+    assertTrue(graphviz.contains("digraph G {"));
   }
 
   @Test
   public void shouldPrintAsPlantUmlWhenSimpleTopologyIsValid () {
     Topology topology = simpleStreamSupplier.get().build();
 
-    String graphviz = KafkaStreamsTopologyGraphvizPrinter.printPlantUml(topology);
+    String graphviz = StreamsTopologyGraphviz.printPlantUml(topology);
     out.println(graphviz);
     assertTrue(graphviz.startsWith("@startuml"));
     assertTrue(graphviz.endsWith("@enduml"));
