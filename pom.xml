@@ -5,7 +5,7 @@
 
   <groupId>no.sysco.middleware.kafka</groupId>
   <artifactId>kafka-utils</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.2</version>
   <modules>
     <module>streams-graphviz</module>
   </modules>
@@ -211,7 +211,7 @@
     <developerConnection>scm:git:ssh://git@github.com/sysco-middleware/kafka-utils.git
     </developerConnection>
     <url>http://github.com/sysco-middleware/kafka-utils/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>v0.1.2</tag>
   </scm>
 
   <issueManagement>
