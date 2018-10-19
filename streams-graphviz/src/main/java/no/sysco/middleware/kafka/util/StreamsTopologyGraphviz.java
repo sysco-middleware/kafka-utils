@@ -103,7 +103,7 @@ public class StreamsTopologyGraphviz {
       } else if (node instanceof TopologyDescription.Processor) {
         String processorId = String.format("node-%s", node.name());
         DotGraph.AbstractNode processorNode = cluster.addNode(processorId)
-            .setLabel(String.format("Source: %s", node.name()));
+            .setLabel(String.format("Processor: %s", node.name()));
 
         for (TopologyDescription.Node predecessor : node.predecessors()) {
           String predecessorId = String.format("node-%s", predecessor.name());
