@@ -24,6 +24,8 @@ public class StreamsTopologyGraphviz {
 
     printStores(topologyDescription, digraph);
 
+    printGlobalStores(topologyDescription, digraph);
+
     printSubtopologies(topologyDescription, digraph);
 
     return dotGraph.render();
@@ -34,6 +36,46 @@ public class StreamsTopologyGraphviz {
     topologyDescription
         .subtopologies()
         .forEach(subtopology -> printSubtopology(subtopology, digraph));
+  }
+
+  private static void printGlobalStores(TopologyDescription topologyDescription,
+      DotGraph.Digraph digraph) {
+    topologyDescription.globalStores()
+        .forEach(
+            globalStore ->
+            {
+              TopologyDescription.Processor processor = globalStore.processor();
+
+              String processorId = String.format("node-%s", processor.name());
+              DotGraph.AbstractNode processorNode = digraph.addNode(processorId)
+                  .setLabel(String.format("Processor: %s", processor.name()));
+
+              TopologyDescription.Source predecessor = globalStore.source();
+              String predecessorId = String.format("node-%s", predecessor.name());
+              processorNode.addAssociation(predecessorId, processorId);
+
+              digraph.addNode(predecessorId)
+                  .setLabel(String.format("Source: %s", predecessor.name()));
+
+              final String topics = predecessor.topics();
+
+              Stream.of(topics.substring(1, topics.length() - 1).split(","))
+                  .map(String::trim)
+                  .forEach(topic -> {
+                    String topicId = String.format("topic-%s", topic);
+                    digraph.addNode(topicId)
+                        .setLabel(String.format("Topic: %s", topic))
+                        .addAssociation(topicId, predecessorId);
+                  });
+
+              String id = String.format("global-store-%s", globalStore.id());
+              DotGraph.AbstractNode abstractNode = digraph
+                  .addNode(id)
+                  .setLabel(String.format("Global Store: %s", globalStore.id()))
+                  .setOptions("shape=box3d");
+              abstractNode.addAssociation(processorId, id);
+            });
+    ;
   }
 
   private static void printStores(TopologyDescription topologyDescription,
